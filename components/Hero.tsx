@@ -58,7 +58,7 @@ export default function Hero() {
 
         <div className="animate-fade-up delay-4 mt-8 flex w-full max-w-[16rem] flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-4">
           <a
-            href="#catalogue"
+            href="/catalogue"
             className="bg-brown px-6 py-3.5 text-center font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-cream transition-opacity hover:opacity-85 sm:min-w-[12.5rem] sm:px-8 sm:py-4 sm:text-xs sm:tracking-[0.22em]"
           >
             View Catalogue

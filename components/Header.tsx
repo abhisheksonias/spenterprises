@@ -1,43 +1,57 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const navLinks = [
-  { href: "#catalogue", label: "Products" },
-  { href: "#catalogue", label: "Catalogue" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+type HeaderProps = {
+  variant?: "overlay" | "solid";
+};
+
+const homeLinks = [
+  { href: "/#catalogue", label: "Products" },
+  { href: "/catalogue", label: "Catalogue" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ];
 
-export default function Header() {
+export default function Header({ variant = "overlay" }: HeaderProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isSolid = variant === "solid" || pathname !== "/";
 
   return (
-    <header className="absolute inset-x-0 top-0 z-40 px-4 py-4 sm:px-8 sm:py-5 lg:px-12">
+    <header
+      className={`inset-x-0 top-0 z-40 px-4 py-4 sm:px-8 sm:py-5 lg:px-12 ${
+        isSolid
+          ? "sticky border-b border-hairline bg-cream/95 backdrop-blur-sm"
+          : "absolute"
+      }`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
-        <a
-          href="#top"
+        <Link
+          href="/"
           className="min-w-0 truncate font-sans text-lg font-medium tracking-wide text-brown transition-opacity hover:opacity-70 sm:text-xl md:text-2xl"
         >
           S.P. Enterprises
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-6 lg:flex xl:gap-10">
-          {navLinks.map((link) => (
-            <a
+          {homeLinks.map((link) => (
+            <Link
               key={link.label}
               href={link.href}
               className="font-sans text-xs font-medium uppercase tracking-[0.22em] text-brown transition-opacity hover:opacity-60"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="bg-brown px-5 py-2.5 font-sans text-xs font-medium uppercase tracking-[0.22em] text-cream transition-opacity hover:opacity-85"
           >
             Inquire
-          </a>
+          </Link>
         </nav>
 
         <button
@@ -65,23 +79,23 @@ export default function Header() {
       {open && (
         <div className="mt-3 border border-hairline bg-cream/95 p-5 backdrop-blur-sm lg:hidden">
           <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
+            {homeLinks.map((link) => (
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className="font-sans text-xs font-medium uppercase tracking-[0.22em] text-brown"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#contact"
+            <Link
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="mt-1 inline-block bg-brown px-5 py-3 text-center font-sans text-xs font-medium uppercase tracking-[0.22em] text-cream"
             >
               Inquire
-            </a>
+            </Link>
           </nav>
         </div>
       )}

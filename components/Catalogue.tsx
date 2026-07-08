@@ -1,46 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { productCategories } from "@/lib/catalogue";
 import Reveal from "./Reveal";
-
-const categories = [
-  {
-    id: "hang-tags",
-    variants: "8 Variants",
-    title: "Hang Tags",
-    features: "Daily Use · Multi Piece · Embossed · Foiling · PVC",
-    image:
-      "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Craftsperson finishing hang tags on production equipment",
-  },
-  {
-    id: "woven-labels",
-    variants: "4 Variants",
-    title: "Woven Labels",
-    features: "Daily Use · High Density · Washcare · Patches",
-    image:
-      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Premium wristwatch detailing representing woven finish",
-  },
-  {
-    id: "printed-labels",
-    variants: "4 Variants",
-    title: "Printed Labels",
-    features: "B&W · Multicolor · Cotton · Designer Ribbons",
-    image:
-      "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Warehouse shelves stocked with packaged goods",
-  },
-  {
-    id: "heat-transfer",
-    variants: "4 Variants",
-    title: "Heat Transfer",
-    features: "Paper Base · Plastic Base · High Density · DTF",
-    image:
-      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Graphic print design on apparel",
-  },
-];
 
 export default function Catalogue() {
   return (
@@ -69,14 +32,17 @@ export default function Catalogue() {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {categories.map((category, index) => (
+          {productCategories.map((category, index) => (
             <Reveal
               key={category.id}
               as="article"
               delay={Math.min(index * 100, 300)}
               className="group flex min-w-0 flex-col overflow-hidden"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-brown/5">
+              <Link
+                href={`/catalogue?category=${category.slug}`}
+                className="relative aspect-[4/3] overflow-hidden bg-brown/5"
+              >
                 <Image
                   src={category.image}
                   alt={category.imageAlt}
@@ -84,7 +50,7 @@ export default function Catalogue() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />
-              </div>
+              </Link>
               <div className="flex flex-1 flex-col bg-[#ead7d1] px-5 py-5 sm:px-6 sm:py-6">
                 <p className="mb-2 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold sm:text-[11px]">
                   {category.variants}
@@ -95,13 +61,13 @@ export default function Catalogue() {
                 <p className="mb-6 flex-1 font-sans text-[12px] leading-relaxed text-brown-muted sm:text-[13px]">
                   {category.features}
                 </p>
-                <a
-                  href="#contact"
+                <Link
+                  href={`/catalogue?category=${category.slug}`}
                   className="inline-flex items-center gap-2 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-gold transition-opacity hover:opacity-70 sm:text-xs"
                 >
                   Explore
                   <span aria-hidden="true">→</span>
-                </a>
+                </Link>
               </div>
             </Reveal>
           ))}
