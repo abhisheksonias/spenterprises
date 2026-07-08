@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -31,9 +32,16 @@ export default function Header({ variant = "overlay" }: HeaderProps) {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
         <Link
           href="/"
-          className="min-w-0 truncate font-sans text-lg font-medium tracking-wide text-brown transition-opacity hover:opacity-70 sm:text-xl md:text-2xl"
+          className="shrink-0 transition-opacity hover:opacity-80"
         >
-          S.P. Enterprises
+          <Image
+            src="/spe.png"
+            alt="S.P. Enterprises logo"
+            width={120}
+            height={60}
+            className="h-10 w-auto sm:h-12"
+            priority
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex xl:gap-10">
