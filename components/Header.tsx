@@ -32,16 +32,19 @@ export default function Header({ variant = "overlay" }: HeaderProps) {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
         <Link
           href="/"
-          className="shrink-0 transition-opacity hover:opacity-80"
+          className="flex shrink-0 items-center gap-2 transition-opacity hover:opacity-80 sm:gap-3"
         >
           <Image
             src="/spe.png"
             alt="S.P. Enterprises logo"
-            width={120}
-            height={60}
-            className="h-10 w-auto sm:h-12"
+            width={64}
+            height={64}
+            className="h-9 w-9 rounded-sm sm:h-10 sm:w-10"
             priority
           />
+          <span className="font-sans text-base font-medium tracking-wide text-brown sm:text-lg md:text-xl">
+            S.P. Enterprises
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex xl:gap-10">

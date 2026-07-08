@@ -58,8 +58,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/apple-icon" }],
+    icon: [{ url: "/spe.png", type: "image/png" }],
+    shortcut: ["/spe.png"],
+    apple: [{ url: "/spe.png", type: "image/png" }],
   },
   other: {
     "geo.region": "IN-PB",
@@ -73,7 +74,7 @@ const organizationSchema = {
   name: siteConfig.name,
   alternateName: siteConfig.shortName,
   url: siteConfig.url,
-  logo: absoluteUrl("/favicon.svg"),
+  logo: absoluteUrl("/spe.png"),
   description: siteConfig.description,
   foundingDate: String(siteConfig.foundedYear),
   email: siteConfig.email,
