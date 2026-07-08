@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { loginAction } from "@/app/actions/admin";
+
+export const metadata: Metadata = {
+  title: "Admin Login",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 type LoginPageProps = {
   searchParams: Promise<{ error?: string; next?: string }>;

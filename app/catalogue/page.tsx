@@ -2,13 +2,24 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import FullCatalogue from "@/components/FullCatalogue";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 import { listPublishedCategories } from "@/lib/queries/categories";
 import { listPublishedProducts } from "@/lib/queries/products";
+import { absoluteUrl, siteConfig } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Full Catalogue | S.P. Enterprises",
+  title: "Full Catalogue",
   description:
-    "Explore hang tags, woven labels, printed labels, heat transfer, and more branding solutions from S.P. Enterprises.",
+    "Browse the S.P. Enterprises catalogue — hang tags, woven labels, printed labels, heat transfer, stickers, and custom branding solutions.",
+  alternates: {
+    canonical: "/catalogue",
+  },
+  openGraph: {
+    title: `Full Catalogue | ${siteConfig.name}`,
+    description:
+      "Explore hang tags, woven labels, printed labels, heat transfer, and more branding solutions from S.P. Enterprises.",
+    url: absoluteUrl("/catalogue"),
+  },
 };
 
 export const dynamic = "force-dynamic";
@@ -34,8 +45,38 @@ export default async function CataloguePage({
     console.error("Failed to load catalogue", error);
   }
 
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `Full Catalogue | ${siteConfig.name}`,
+    description:
+      "Explore hang tags, woven labels, printed labels, heat transfer, and more branding solutions from S.P. Enterprises.",
+    url: absoluteUrl("/catalogue"),
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    about: {
+      "@type": "Organization",
+      name: siteConfig.name,
+    },
+    hasPart: products.slice(0, 24).map((product) => ({
+      "@type": "Product",
+      name: product.title,
+      description: product.description,
+      image: product.image_url || undefined,
+      brand: {
+        "@type": "Brand",
+        name: siteConfig.name,
+      },
+      category: product.category_title,
+    })),
+  };
+
   return (
     <main className="relative flex min-h-full flex-1 flex-col bg-cream">
+      <JsonLd data={collectionSchema} />
       <Header variant="solid" />
       <FullCatalogue
         categories={categories.map((category) => ({

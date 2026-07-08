@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import AdminNav from "@/components/admin/AdminNav";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+  title: {
+    default: "Admin",
+    template: "%s | Admin · S.P. Enterprises",
+  },
+};
 
 export default function ProtectedAdminLayout({
   children,

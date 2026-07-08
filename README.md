@@ -33,6 +33,7 @@ Set:
 | `DATABASE_URL` | Neon connection string (`?sslmode=require`) |
 | `ADMIN_PASSWORD` | Shared password for `/admin` |
 | `ADMIN_SESSION_SECRET` | Long random string used to sign admin cookies |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL (e.g. `https://www.spenterprises.com`) |
 
 **Security:** If a Neon password was ever shared in chat or committed, rotate it in the Neon dashboard and update `DATABASE_URL`.
 
